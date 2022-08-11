@@ -2,6 +2,8 @@ package br.com.fiap.sprint3.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-// public interface ProductRepository extends JpaRepository<, long>{
+import br.com.fiap.sprint3.model.Product;
+
+public interface ProductRepository extends JpaRepository<Product, Long>{
   
-// }
+}
