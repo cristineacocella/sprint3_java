@@ -3,8 +3,7 @@ package br.com.fiap.sprint3.model;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,19 +16,21 @@ public class Product {
   private String name;
   private String description;
   private BigDecimal price;
-  @Enumerated(value = EnumType.STRING)
-  private Situation situation;
-  
+  private int inventory;
+
+
   public Product() {
   }
 
-  public Product(long id, String name, String description, BigDecimal price, Situation situation) {
+  public Product(long id, String name, String description, BigDecimal price, int quantity) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.price = price;
-    this.situation = situation;
+    this.inventory = quantity;
   }
+
+
 
   public long getId() {
     return id;
@@ -63,14 +64,12 @@ public class Product {
     this.price = price;
   }
 
-  public Situation getSituation() {
-    return situation;
+  public int getQuantity() {
+    return inventory;
   }
 
-  public void setSituation(Situation situation) {
-    this.situation = situation;
+  public void setQuantity(int quantity) {
+    this.inventory = quantity;
   }
 
-  
-  
 }

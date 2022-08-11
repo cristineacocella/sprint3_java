@@ -1,1 +1,1 @@
-insert into Product (DESCRIPTION, NAME, PRICE, SITUATION) VALUES ('Tunica Bege linda', 'Tunica Bege', 150.99, 'ENVIADO');
+insert into Product (DESCRIPTION, NAME, PRICE, INVENTORY) VALUES ('Tunica Bege linda', 'Tunica Bege', 150.99, 20);
