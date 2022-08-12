@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.sprint3.model.Product;
-import br.com.fiap.sprint3.service.ProductService;
+import br.com.fiap.sprint3.model.Produto;
+import br.com.fiap.sprint3.service.ProdutoService;
 
 @RestController
-public class ProductController {
+public class ProdutoController {
   
   @Autowired
-  private ProductService service;
+  private ProdutoService service;
 
   @GetMapping("/api/product")
-  public List<Product> index(){
+  public List<Produto> index(){
     return service.listAll();
   }
 
   @GetMapping("/api/product/{id}")
-    public ResponseEntity<Product> show(@PathVariable Long id){
-      Product Product = service.get(id);
+    public ResponseEntity<Produto> show(@PathVariable Long id){
+      Produto Product = service.get(id);
       return ResponseEntity.status(HttpStatus.OK).body(Product);
     }
 }

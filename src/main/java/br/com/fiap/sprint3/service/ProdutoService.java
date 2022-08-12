@@ -5,20 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.fiap.sprint3.model.Product;
-import br.com.fiap.sprint3.repository.ProductRepository;
+import br.com.fiap.sprint3.model.Produto;
+import br.com.fiap.sprint3.repository.ProdutoRepository;
 
 @Service
-public class ProductService {
+public class ProdutoService {
   
   @Autowired
-  ProductRepository repo;
+  ProdutoRepository repo;
 
-  public List<Product> listAll() {
+  public List<Produto> listAll() {
     return repo.findAll();
   }
 
-  public Product get(Long id) {
+  public Produto get(Long id) {
     return repo.findById(id).get();
   }
 
