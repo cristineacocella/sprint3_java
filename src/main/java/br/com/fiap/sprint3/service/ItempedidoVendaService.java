@@ -5,11 +5,9 @@ import org.springframework.stereotype.Service;
 
 import br.com.fiap.sprint3.repository.ItemPedidoVendaRepository;
 
-
 @Service
-public class ItemPedidoVenda {
- 
+public class ItempedidoVendaService {
+
   @Autowired
   ItemPedidoVendaRepository repo;
-  
 }
