@@ -19,8 +19,8 @@ public class ProdutoController {
   private ProdutoService service;
 
   @GetMapping("/api/product")
-  public List<Produto> index(){
-    return service.listAll();
+  public ResponseEntity<List<Produto>> index(){
+    return ResponseEntity.status(HttpStatus.OK).body(service.listAll());
   }
 
   @GetMapping("/api/product/{id}")
