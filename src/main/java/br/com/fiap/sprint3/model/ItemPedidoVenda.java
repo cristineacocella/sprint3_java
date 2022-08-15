@@ -46,6 +46,17 @@ public class ItemPedidoVenda {
   public ItemPedidoVenda() {
   }
 
+  public ItemPedidoVenda(PedidoVenda pedidoVenda, Produto produto, int quantidadePedida, BigDecimal valorUnitarioVenda,
+      BigDecimal valorTotalItemVenda) {
+    this.pedidoVenda = pedidoVenda;
+    this.produto = produto;
+    this.quantidadePedida = quantidadePedida;
+    this.valorUnitarioVenda = valorUnitarioVenda;
+    this.valorTotalItemVenda = valorTotalItemVenda;
+  }
+
+
+
   public long getId() {
     return id;
   }

@@ -34,6 +34,7 @@ public class Usuario {
   private long cpf;
   
   @Enumerated(EnumType.STRING)
+  @Column(name = "nm_genero")
   private Genero genero;
 
   public Usuario() {

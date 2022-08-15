@@ -18,7 +18,7 @@ public class EmpresaService {
     return repo.findAll();
   }
 
-  public Empresa get(Long id) {
+  public Empresa findById(Long id) {
     return repo.findById(id).get();
   }
 

@@ -42,6 +42,17 @@ public class PedidoVenda {
   public PedidoVenda() {
   }
 
+  
+
+  public PedidoVenda(Empresa empresa, Usuario usuario, LocalDate dataPedidoVenda, BigDecimal valorTotalPedidoVenda) {
+    this.empresa = empresa;
+    this.usuario = usuario;
+    this.dataPedidoVenda = dataPedidoVenda;
+    this.valorTotalPedidoVenda = valorTotalPedidoVenda;
+  }
+
+
+
   public long getId() {
     return id;
   }

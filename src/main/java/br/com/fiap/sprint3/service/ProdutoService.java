@@ -1,5 +1,6 @@
 package br.com.fiap.sprint3.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,12 @@ public class ProdutoService {
     return repo.findAll();
   }
 
-  public Produto get(Long id) {
-    return repo.findById(id).get();
+  public List<Produto> findById(List<Long> listaIdProdutos) {
+    List<Produto> listaProdutos = new ArrayList<Produto>();
+    for (Long idProduto : listaIdProdutos) {
+      listaProdutos.add(repo.findById(idProduto).get());
+    }
+    return listaProdutos;
   }
 
 }
