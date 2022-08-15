@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +20,10 @@ public class Produto {
   @Column(name="id_produto")
   @GeneratedValue(strategy= GenerationType.IDENTITY)
   private long id;
+
+  @ManyToOne
+  @JoinColumn(name="id_empresa")
+  private Empresa empresa;
 
   @Column(name="nr_sku")
   private long nrSku;
@@ -109,6 +115,16 @@ public class Produto {
 
   public void setNomeMarca(String nomeMarca) {
     this.nomeMarca = nomeMarca;
+  }
+
+
+  public Empresa getEmpresa() {
+    return empresa;
+  }
+
+
+  public void setEmpresa(Empresa empresa) {
+    this.empresa = empresa;
   }
 
   

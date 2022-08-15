@@ -2,6 +2,8 @@ package br.com.fiap.sprint3.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,6 +12,7 @@ import javax.persistence.Table;
 public class Empresa {
   
   @Id
+  @GeneratedValue(strategy= GenerationType.IDENTITY)
   @Column(name="id_empresa")
   private long id;
 
@@ -65,8 +68,6 @@ public class Empresa {
   public void setNomeFantasia(String nomeFantasia) {
     this.nomeFantasia = nomeFantasia;
   }
-
   
-
   
 }
