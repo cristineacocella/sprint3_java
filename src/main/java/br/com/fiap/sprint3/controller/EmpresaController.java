@@ -1,5 +1,4 @@
 package br.com.fiap.sprint3.controller;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,23 +8,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.sprint3.model.Produto;
-import br.com.fiap.sprint3.service.ProdutoService;
+
+import br.com.fiap.sprint3.model.Empresa;
+
+
+import br.com.fiap.sprint3.service.EmpresaService;
 
 @RestController
-public class ProdutoController {
+public class EmpresaController {
   
   @Autowired
-  private ProdutoService service;
+  private EmpresaService service;
 
-  @GetMapping("/api/product")
-  public ResponseEntity<List<Produto>> findAll(){
+  @GetMapping("/api/empresa")
+  public ResponseEntity<List<Empresa>> findAll(){
     return ResponseEntity.status(HttpStatus.OK).body(service.listAll());
   }
 
-  @GetMapping("/api/product/{id}")
-    public ResponseEntity<Produto> findById(@PathVariable Long id){
-      Produto product = service.get(id);
-      return ResponseEntity.status(HttpStatus.OK).body(product);
-    }
+  @GetMapping("/api/empresa/{id}")
+  public ResponseEntity<Empresa> findById(@PathVariable Long id){
+    Empresa empresa = service.get(id);
+    return ResponseEntity.status(HttpStatus.OK).body(empresa);
+  }
 }
