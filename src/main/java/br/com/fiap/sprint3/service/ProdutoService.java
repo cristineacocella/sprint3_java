@@ -19,12 +19,8 @@ public class ProdutoService {
     return repo.findAll();
   }
 
-  public List<Produto> findById(List<Long> listaIdProdutos) {
-    List<Produto> listaProdutos = new ArrayList<Produto>();
-    for (Long idProduto : listaIdProdutos) {
-      listaProdutos.add(repo.findById(idProduto).get());
-    }
-    return listaProdutos;
+  public Produto findById(Long  listaIdProdutos) {
+    return repo.findById(listaIdProdutos).get();
   }
 
 }

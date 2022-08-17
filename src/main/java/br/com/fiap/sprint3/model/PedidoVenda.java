@@ -1,6 +1,7 @@
 package br.com.fiap.sprint3.model;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -32,7 +33,7 @@ public class PedidoVenda {
 
 
   @Column(name = "dt_pedido_venda")
-  private LocalDate dataPedidoVenda;
+  private Instant dataPedidoVenda;
   
 
   @Column(name = "vl_total_pedido_venda")
@@ -44,7 +45,7 @@ public class PedidoVenda {
 
   
 
-  public PedidoVenda(Empresa empresa, Usuario usuario, LocalDate dataPedidoVenda, BigDecimal valorTotalPedidoVenda) {
+  public PedidoVenda(Empresa empresa, Usuario usuario, Instant dataPedidoVenda, BigDecimal valorTotalPedidoVenda) {
     this.empresa = empresa;
     this.usuario = usuario;
     this.dataPedidoVenda = dataPedidoVenda;
@@ -61,15 +62,21 @@ public class PedidoVenda {
     this.id = id;
   }
 
-  public LocalDate getDataPedidoVenda() {
-    return dataPedidoVenda;
-  }
 
-  public void setDataPedidoVenda(LocalDate dataPedidoVenda) {
-    this.dataPedidoVenda = dataPedidoVenda;
-  }
 
-  public BigDecimal getValorTotalPedidoVenda() {
+  public Instant getDataPedidoVenda() {
+	return dataPedidoVenda;
+}
+
+
+
+public void setDataPedidoVenda(Instant dataPedidoVenda) {
+	this.dataPedidoVenda = dataPedidoVenda;
+}
+
+
+
+public BigDecimal getValorTotalPedidoVenda() {
     return valorTotalPedidoVenda;
   }
 

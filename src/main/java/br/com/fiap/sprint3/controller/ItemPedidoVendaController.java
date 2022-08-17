@@ -22,31 +22,31 @@ import br.com.fiap.sprint3.service.UsuarioService;
 
 @RestController
 public class ItemPedidoVendaController {
-  
-  @Autowired
-  private ItemPedidoVendaService service;
 
-  @Autowired
-  private UsuarioService serviceUsuario;
+	@Autowired
+	private ItemPedidoVendaService service;
 
-  @Autowired
-  private EmpresaService serviceEmpresa;
+	@Autowired
+	private UsuarioService serviceUsuario;
 
-  @Autowired
-  private ProdutoService serviceProduto;
+	@Autowired
+	private EmpresaService serviceEmpresa;
 
+	@Autowired
+	private ProdutoService serviceProduto;
 
-  @GetMapping("/api/itempedidovenda")
-  public ResponseEntity<List<ItemPedidoVenda>> index(){
-    return ResponseEntity.status(HttpStatus.OK).body(service.index());
-  }
+	@GetMapping("/api/itempedidovenda")
+	public ResponseEntity<List<ItemPedidoVenda>> index() {
+		return ResponseEntity.status(HttpStatus.OK).body(service.index());
+	}
 
-  @PostMapping("/api/pedidovenda/{idUsuario}/{idEmpresa}/{listaIdProdutos}/{quantidade}")
-  public ResponseEntity<PedidoVenda> compra(@PathVariable Long idUsuario, Long idEmpresa, List<Long> listaIdProdutos, int quantidade) {
-    Usuario usuario = serviceUsuario.findById(idUsuario);
-    Empresa empresa = serviceEmpresa.findById(idEmpresa);
-    List<Produto> produtos = serviceProduto.findById(listaIdProdutos);
-    return ResponseEntity.status(HttpStatus.OK).body(service.compra(usuario, empresa, produtos, quantidade));
-  }
+	@PostMapping("/api/pedidovenda/{idUsuario}/{idEmpresa}/{idProduto}/{quantidade}")
+	public ResponseEntity<PedidoVenda> compra(@PathVariable Long idUsuario, @PathVariable Long idEmpresa,
+			@PathVariable Long idProduto, @PathVariable int quantidade) {
+		Usuario usuario = serviceUsuario.findById(idUsuario);
+		Empresa empresa = serviceEmpresa.findById(idEmpresa);
+		Produto produto = serviceProduto.findById(idProduto);
+		return ResponseEntity.status(HttpStatus.OK).body(service.compra(usuario, empresa, produto, quantidade));
+	}
 
 }
