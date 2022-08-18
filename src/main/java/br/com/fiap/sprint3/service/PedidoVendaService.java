@@ -36,7 +36,7 @@ public class PedidoVendaService {
 
   public PedidoVenda compra(Usuario usuario, Empresa empresa, Produto produto, int quantidade) {
 		
-		PedidoVenda pedidoVenda = new PedidoVenda(empresa, usuario, Instant.now(), produto.getPrecoUnitario());
+		PedidoVenda pedidoVenda = new PedidoVenda(empresa, usuario, Instant.now(), valorTotal(quantidade, produto.getPrecoUnitario()));
 
      repo.save(pedidoVenda);
      
@@ -50,7 +50,6 @@ public class PedidoVendaService {
 
     // pedidoVenda.setItemPedidoVendas(listaItemPedidoVenda);
     
-
 		return pedidoVenda;
 	}
 
