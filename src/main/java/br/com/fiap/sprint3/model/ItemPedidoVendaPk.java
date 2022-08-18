@@ -2,8 +2,10 @@ package br.com.fiap.sprint3.model;
 
 import java.io.Serializable;
 
+
+
 public class ItemPedidoVendaPk implements Serializable{
-  
+ 
   private long id;
   private long pedidoVenda;
 

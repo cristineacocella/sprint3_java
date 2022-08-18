@@ -1,8 +1,11 @@
 package br.com.fiap.sprint3.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -11,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -32,25 +36,44 @@ public class PedidoVenda {
 
 
   @Column(name = "dt_pedido_venda")
-  private LocalDate dataPedidoVenda;
+  private Instant dataPedidoVenda;
   
 
   @Column(name = "vl_total_pedido_venda")
   private BigDecimal valorTotalPedidoVenda;
 
+  @OneToMany(mappedBy = "pedidoVenda", cascade=CascadeType.ALL)
+  private List<ItemPedidoVenda> listaItemProdutoVenda = new ArrayList<ItemPedidoVenda>();
+
+  public PedidoVenda(){
+
+  }
   
-  public PedidoVenda() {
+  public PedidoVenda(Empresa empresa, Usuario usuario, Instant dataPedidoVenda
+    ) {
+    this.empresa = empresa;
+    this.usuario = usuario;
+    this.dataPedidoVenda = dataPedidoVenda;
+  }
+
+
+  public PedidoVenda(Empresa empresa, Usuario usuario, Instant dataPedidoVenda, BigDecimal valorTotalPedidoVenda,
+      List<ItemPedidoVenda> listaItemProdutoVenda) {
+    this.empresa = empresa;
+    this.usuario = usuario;
+    this.dataPedidoVenda = dataPedidoVenda;
+    this.valorTotalPedidoVenda = valorTotalPedidoVenda;
+    this.listaItemProdutoVenda = listaItemProdutoVenda;
   }
 
   
 
-  public PedidoVenda(Empresa empresa, Usuario usuario, LocalDate dataPedidoVenda, BigDecimal valorTotalPedidoVenda) {
+  public PedidoVenda(Empresa empresa, Usuario usuario, Instant dataPedidoVenda, BigDecimal valorTotalPedidoVenda) {
     this.empresa = empresa;
     this.usuario = usuario;
     this.dataPedidoVenda = dataPedidoVenda;
     this.valorTotalPedidoVenda = valorTotalPedidoVenda;
   }
-
 
 
   public long getId() {
@@ -61,15 +84,21 @@ public class PedidoVenda {
     this.id = id;
   }
 
-  public LocalDate getDataPedidoVenda() {
-    return dataPedidoVenda;
-  }
 
-  public void setDataPedidoVenda(LocalDate dataPedidoVenda) {
-    this.dataPedidoVenda = dataPedidoVenda;
-  }
 
-  public BigDecimal getValorTotalPedidoVenda() {
+  public Instant getDataPedidoVenda() {
+	return dataPedidoVenda;
+}
+
+
+
+public void setDataPedidoVenda(Instant dataPedidoVenda) {
+	this.dataPedidoVenda = dataPedidoVenda;
+}
+
+
+
+public BigDecimal getValorTotalPedidoVenda() {
     return valorTotalPedidoVenda;
   }
 
@@ -92,4 +121,29 @@ public class PedidoVenda {
   public void setUsuario(Usuario usuario) {
     this.usuario = usuario;
   }
+
+
+  public List<ItemPedidoVenda> getListaItemProdutoVenda() {
+    return listaItemProdutoVenda;
+  }
+
+  public void adicionarItemNoCarrinho(ItemPedidoVenda itemPedidoVenda){
+    this.listaItemProdutoVenda.add(itemPedidoVenda);
+    System.out.println("ADICIONADO NA LISTA  "+ this.listaItemProdutoVenda);
+  }
+
+
+  @Override
+  public String toString() {
+    return "PedidoVenda [dataPedidoVenda=" + dataPedidoVenda + ", empresa=" + empresa + ", id=" + id
+        + ", listaItemProdutoVenda=" + listaItemProdutoVenda + ", usuario=" + usuario + ", valorTotalPedidoVenda="
+        + valorTotalPedidoVenda + "]";
+  }
+
+  public void setListaItemProdutoVenda(List<ItemPedidoVenda> listaItemProdutoVenda) {
+    this.listaItemProdutoVenda = listaItemProdutoVenda;
+  }
+
+  
+  
 }
