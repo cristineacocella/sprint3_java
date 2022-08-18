@@ -48,13 +48,8 @@ public class PedidoVendaService {
     List<ItemPedidoVenda> listaItemPedidoVenda = new ArrayList<ItemPedidoVenda>();
     listaItemPedidoVenda.add(itemPedidoVenda);
 
+    // pedidoVenda.setItemPedidoVendas(listaItemPedidoVenda);
     
-    // pedidoVenda.setListaItemProdutoVenda(listaItemPedidoVenda);
-    // System.out.println(listaItemPedidoVenda.toString());
-    pedidoVenda.adicionarItemNoCarrinho(itemPedidoVenda);
-    repo.save(pedidoVenda);
-   
-    System.out.println(pedidoVenda.getId() + "AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"); 
 
 		return pedidoVenda;
 	}
