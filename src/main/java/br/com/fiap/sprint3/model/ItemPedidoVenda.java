@@ -3,6 +3,7 @@ package br.com.fiap.sprint3.model;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,10 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
+
 @Entity
 @IdClass(ItemPedidoVendaPk.class)
 @Table(name= "T_CALI_ITEM_PEDIDO_VENDA")
 public class ItemPedidoVenda {
+  
   
   @Id 
   @Column(name="id_item")
@@ -111,6 +115,13 @@ public class ItemPedidoVenda {
 
   public void setValorTotalItemVenda(BigDecimal valorTotalItemVenda) {
     this.valorTotalItemVenda = valorTotalItemVenda;
+  }
+
+  @Override
+  public String toString() {
+    return "ItemPedidoVenda [id=" + id + ", pedidoVenda=" + pedidoVenda + ", produto=" + produto + ", quantidadePedida="
+        + quantidadePedida + ", valorDescontoItemVenda=" + valorDescontoItemVenda + ", valorTotalItemVenda="
+        + valorTotalItemVenda + ", valorUnitarioVenda=" + valorUnitarioVenda + "]";
   }
 
 

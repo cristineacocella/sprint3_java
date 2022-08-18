@@ -2,13 +2,10 @@ package br.com.fiap.sprint3.model;
 
 import java.io.Serializable;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
 
 public class ItemPedidoVendaPk implements Serializable{
-  
-	
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
+ 
   private long id;
   private long pedidoVenda;
 
