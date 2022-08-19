@@ -118,6 +118,18 @@ public BigDecimal getValorTotalPedidoVenda() {
 
   public void setItemPedidoVendas(List<ItemPedidoVenda> itemPedidoVendas) {
     this.itemPedidoVendas = itemPedidoVendas;
+  }
+
+  public void adicionar(ItemPedidoVenda itemPedidoVenda){
+    this.itemPedidoVendas.add(itemPedidoVenda);
+  }
+
+  @Override
+  public String toString() {
+    return "PedidoVenda [dataPedidoVenda=" + dataPedidoVenda + ", empresa=" + empresa + ", id=" + id
+        + ", itemPedidoVendas=" + itemPedidoVendas + ", usuario=" + usuario + ", valorTotalPedidoVenda="
+        + valorTotalPedidoVenda + "]";
   } 
+  
   
 }

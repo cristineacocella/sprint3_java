@@ -52,6 +52,11 @@ public class ItemPedidoVenda {
 
   
 
+  public ItemPedidoVenda(Produto produto, int quantidadePedida) {
+    this.produto = produto;
+    this.quantidadePedida = quantidadePedida;
+  }
+
   public ItemPedidoVenda(Produto produto, int quantidadePedida, 
       BigDecimal valorUnitarioVenda) {
     this.produto = produto;

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.sprint3.model.Empresa;
+import br.com.fiap.sprint3.model.ItemPedidoVenda;
 import br.com.fiap.sprint3.model.PedidoVenda;
 import br.com.fiap.sprint3.model.Produto;
 import br.com.fiap.sprint3.model.Usuario;
@@ -32,22 +33,16 @@ public class PedidoVendaController {
   @Autowired
   private UsuarioService serviceUsuario;
 
-  @Autowired
-  private EmpresaService serviceEmpresa;
-
-  @Autowired
-  private ProdutoService serviceProduto;
-
   @GetMapping("/api/pedidovenda")
   public ResponseEntity<List<PedidoVenda>> index() {
       return ResponseEntity.status(HttpStatus.OK).body(service.index());
   }
   
-  @PostMapping("/api/pedidovenda/{idUsuario}/{quantidade}")
-	public ResponseEntity<PedidoVenda> compra(@PathVariable Long idUsuario, @PathVariable int quantidade, @RequestBody Produto produto) {
-    System.out.println(produto.getPrecoUnitario());
+  @PostMapping("/api/pedidovenda/{idUsuario}")
+	public ResponseEntity<PedidoVenda> compra(@PathVariable Long idUsuario, @RequestBody ItemPedidoVenda itemPedidoVenda) {
+  
 		Usuario usuario = serviceUsuario.findById(idUsuario);
-    PedidoVenda pedidoVenda = service.compra(usuario, produto, quantidade);
+    PedidoVenda pedidoVenda = service.compra(usuario, itemPedidoVenda);
 
 		return ResponseEntity.status(HttpStatus.OK).body(pedidoVenda);
 	}
