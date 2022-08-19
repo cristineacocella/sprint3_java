@@ -18,12 +18,12 @@ public class ProdutoController {
   @Autowired
   private ProdutoService service;
 
-  @GetMapping("/api/product")
+  @GetMapping("/api/produto")
   public ResponseEntity<List<Produto>> findAll(){
     return ResponseEntity.status(HttpStatus.OK).body(service.listAll());
   }
 
-  @GetMapping("/api/product/{id}")
+  @GetMapping("/api/produto/{id}")
     public ResponseEntity<Produto> findById(@PathVariable Long id){
       Produto product = service.findById(id);
       return ResponseEntity.status(HttpStatus.OK).body(product);

@@ -34,19 +34,18 @@ public class PedidoVendaService {
     return repo.findAll();
   }
 
-  public PedidoVenda compra(Usuario usuario, Empresa empresa, Produto produto, int quantidade) {
-		
-		PedidoVenda pedidoVenda = new PedidoVenda(empresa, usuario, Instant.now(), valorTotal(quantidade, produto.getPrecoUnitario()));
+  public PedidoVenda compra(Usuario usuario, Produto produto, int quantidade) {
 
-     repo.save(pedidoVenda);
+		PedidoVenda pedidoVenda = new PedidoVenda(produto.getEmpresa(), usuario, Instant.now(), valorTotal(quantidade, produto.getPrecoUnitario()));
+    repo.save(pedidoVenda);
      
     ItemPedidoVenda itemPedidoVenda = new ItemPedidoVenda(pedidoVenda, produto, quantidade, 
     produto.getPrecoUnitario(), valorTotal(quantidade, produto.getPrecoUnitario()));
 
     repositoryItem.save(itemPedidoVenda);
 
-    List<ItemPedidoVenda> listaItemPedidoVenda = new ArrayList<ItemPedidoVenda>();
-    listaItemPedidoVenda.add(itemPedidoVenda);
+    // List<ItemPedidoVenda> listaItemPedidoVenda = new ArrayList<ItemPedidoVenda>();
+    // listaItemPedidoVenda.add(itemPedidoVenda);
 
     // pedidoVenda.setItemPedidoVendas(listaItemPedidoVenda);
     

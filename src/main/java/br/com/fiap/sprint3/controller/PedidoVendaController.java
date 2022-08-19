@@ -19,6 +19,7 @@ import br.com.fiap.sprint3.service.UsuarioService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -42,14 +43,12 @@ public class PedidoVendaController {
       return ResponseEntity.status(HttpStatus.OK).body(service.index());
   }
   
-  @PostMapping("/api/pedidovenda/{idUsuario}/{idEmpresa}/{idProduto}/{quantidade}")
-	public ResponseEntity<PedidoVenda> compra(@PathVariable Long idUsuario, @PathVariable Long idEmpresa,
-			@PathVariable Long idProduto, @PathVariable int quantidade) {
+  @PostMapping("/api/pedidovenda/{idUsuario}/{quantidade}")
+	public ResponseEntity<PedidoVenda> compra(@PathVariable Long idUsuario, @PathVariable int quantidade, @RequestBody Produto produto) {
+    System.out.println(produto.getPrecoUnitario());
 		Usuario usuario = serviceUsuario.findById(idUsuario);
-		Empresa empresa = serviceEmpresa.findById(idEmpresa);
-		Produto produto = serviceProduto.findById(idProduto);
-    PedidoVenda pedidoVenda = service.compra(usuario, empresa, produto, quantidade);
-    System.out.println(pedidoVenda);
+    PedidoVenda pedidoVenda = service.compra(usuario, produto, quantidade);
+
 		return ResponseEntity.status(HttpStatus.OK).body(pedidoVenda);
 	}
  
