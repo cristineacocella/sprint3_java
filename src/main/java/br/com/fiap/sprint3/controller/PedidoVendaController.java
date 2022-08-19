@@ -39,7 +39,7 @@ public class PedidoVendaController {
   }
   
   @PostMapping("/api/pedidovenda/{idUsuario}")
-	public ResponseEntity<PedidoVenda> compra(@PathVariable Long idUsuario, @RequestBody ItemPedidoVenda itemPedidoVenda) {
+	public ResponseEntity<PedidoVenda> compra(@PathVariable Long idUsuario, @RequestBody List<ItemPedidoVenda> itemPedidoVenda) {
   
 		Usuario usuario = serviceUsuario.findById(idUsuario);
     PedidoVenda pedidoVenda = service.compra(usuario, itemPedidoVenda);

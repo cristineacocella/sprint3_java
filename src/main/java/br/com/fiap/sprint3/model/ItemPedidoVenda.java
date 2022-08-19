@@ -1,5 +1,6 @@
 package br.com.fiap.sprint3.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -12,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name= "T_CALI_ITEM_PEDIDO_VENDA")
-public class ItemPedidoVenda {
+public class ItemPedidoVenda implements Serializable{
   
   @EmbeddedId
   @Column(name="id_item")

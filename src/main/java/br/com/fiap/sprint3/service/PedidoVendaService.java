@@ -2,7 +2,7 @@ package br.com.fiap.sprint3.service;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,22 +30,22 @@ public class PedidoVendaService {
     return repo.findAll();
   }
 
-  public PedidoVenda compra(Usuario usuario, ItemPedidoVenda itemPedidoVenda) {
-
-		PedidoVenda pedidoVenda = new PedidoVenda(itemPedidoVenda.getProduto().getEmpresa(), usuario, Instant.now(), 
-    valorTotal(itemPedidoVenda.getQuantidadePedida(), itemPedidoVenda.getProduto().getPrecoUnitario()));
-    repo.save(pedidoVenda);
-
-    itemPedidoVenda.setPedidoVenda(pedidoVenda);
-    repositoryItem.save(itemPedidoVenda);
-
-    // List<ItemPedidoVenda> listaItemPedidoVenda = new ArrayList<ItemPedidoVenda>();
-    // listaItemPedidoVenda.add(itemPedidoVenda);
-    // pedidoVenda.setItemPedidoVendas(listaItemPedidoVenda);
-    // pedidoVenda.adicionar(itemPedidoVenda);
-    // System.out.println(pedidoVenda);
+  public PedidoVenda compra(Usuario usuario, List<ItemPedidoVenda> itemPedidoVenda) {
+    BigDecimal valorTotalItem = new BigDecimal(0);
+    PedidoVenda pedidoVenda = new PedidoVenda();
+    for (ItemPedidoVenda item : itemPedidoVenda) {
+      valorTotalItem = valorTotalItem.add(valorTotal(item.getQuantidadePedida(), item.getProduto().getPrecoUnitario()));
+      pedidoVenda = new PedidoVenda(item.getProduto().getEmpresa(), usuario, Instant.now(), 
+      valorTotalItem);
+     
+      repo.save(pedidoVenda);
+      item.setPedidoVenda(pedidoVenda);
+      repositoryItem.save(item);
+    }
     
-		return pedidoVenda;
+    pedidoVenda.setItemPedidoVendas(itemPedidoVenda);
+    return pedidoVenda;
+
 	}
 
 	public BigDecimal valorTotal(int quantidade, BigDecimal valorUnitario) {
