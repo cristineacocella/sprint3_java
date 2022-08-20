@@ -7,14 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.sprint3.model.Empresa;
 import br.com.fiap.sprint3.model.ItemPedidoVenda;
 import br.com.fiap.sprint3.model.PedidoVenda;
-import br.com.fiap.sprint3.model.Produto;
 import br.com.fiap.sprint3.model.Usuario;
-import br.com.fiap.sprint3.service.EmpresaService;
 import br.com.fiap.sprint3.service.PedidoVendaService;
-import br.com.fiap.sprint3.service.ProdutoService;
 import br.com.fiap.sprint3.service.UsuarioService;
 
 import org.springframework.web.bind.annotation.GetMapping;
