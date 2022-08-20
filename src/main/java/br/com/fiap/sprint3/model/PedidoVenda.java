@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name="T_CALI_PEDIDO_VENDA")
 public class PedidoVenda {
@@ -42,6 +44,7 @@ public class PedidoVenda {
   @Column(name = "vl_total_pedido_venda")
   private BigDecimal valorTotalPedidoVenda;
 
+  @JsonProperty("Itens pedidos vendas")
   @ManyToMany
   @JoinColumns({@JoinColumn(name= "id_pedido_venda"),@JoinColumn(name="id_produto")})
   private List<ItemPedidoVenda> itemPedidoVendas = new ArrayList<ItemPedidoVenda>();

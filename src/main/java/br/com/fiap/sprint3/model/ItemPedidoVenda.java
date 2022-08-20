@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name= "T_CALI_ITEM_PEDIDO_VENDA")
@@ -20,9 +22,11 @@ public class ItemPedidoVenda implements Serializable{
   private ItemPedidoVendaPk id = new ItemPedidoVendaPk();
  
   @ManyToOne
+  @JsonIgnore
   @MapsId("idPedidoVenda")
   private PedidoVenda pedidoVenda;
 
+ 
   @ManyToOne
   @MapsId("idProduto")
   private Produto produto;
@@ -121,6 +125,15 @@ public class ItemPedidoVenda implements Serializable{
   public void setValorTotalItemVenda(BigDecimal valorTotalItemVenda) {
     this.valorTotalItemVenda = valorTotalItemVenda;
   }
+
+@Override
+public String toString() {
+	return "ItemPedidoVenda [id=" + id + ", pedidoVenda=" + pedidoVenda + ", produto=" + produto + ", quantidadePedida="
+			+ quantidadePedida + ", valorDescontoItemVenda=" + valorDescontoItemVenda + ", valorUnitarioVenda="
+			+ valorUnitarioVenda + ", valorTotalItemVenda=" + valorTotalItemVenda + "]";
+}
+  
+  
 
 
 
