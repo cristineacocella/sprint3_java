@@ -34,19 +34,21 @@ public class PedidoVendaService {
     BigDecimal valorTotalItem = new BigDecimal(0);
     PedidoVenda pedidoVenda = new PedidoVenda();
     ItemPedidoVenda newItemPedidoVenda = new ItemPedidoVenda();
+    repo.save(pedidoVenda);
 
     for (ItemPedidoVenda item : itemPedidoVenda) {
       valorTotalItem = valorTotalItem.add(valorTotal(item.getQuantidadePedida(), item.getProduto().getPrecoUnitario()));
-      pedidoVenda = new PedidoVenda(item.getProduto().getEmpresa(), usuario, Instant.now(), 
-      valorTotalItem);
+      pedidoVenda.setEmpresa(item.getProduto().getEmpresa());
+      pedidoVenda.setUsuario(usuario); 
+      pedidoVenda.setDataPedidoVenda(Instant.now());
   
-      repo.save(pedidoVenda);
       newItemPedidoVenda = new ItemPedidoVenda(pedidoVenda, item.getProduto(),item.getQuantidadePedida(),item.getProduto().getPrecoUnitario(),
       valorTotal(item.getQuantidadePedida(), item.getProduto().getPrecoUnitario()));
       // item.setPedidoVenda(pedidoVenda)
       repositoryItem.save(newItemPedidoVenda);
     }
-    
+    pedidoVenda.setValorTotalPedidoVenda(valorTotalItem);
+    repo.save(pedidoVenda);
     pedidoVenda.setItemPedidoVendas(itemPedidoVenda);
     return pedidoVenda;
 
