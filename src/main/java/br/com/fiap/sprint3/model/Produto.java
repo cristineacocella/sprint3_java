@@ -2,6 +2,7 @@ package br.com.fiap.sprint3.model;
 
 import java.math.BigDecimal;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -47,6 +48,20 @@ public class Produto {
   public Produto() {
   }
 
+  
+
+  public Produto(Empresa empresa, long nrSku, String nome, BigDecimal precoUnitario, int quantidade, String descricao,
+      String nomeMarca) {
+    this.empresa = empresa;
+    this.nrSku = nrSku;
+    this.nome = nome;
+    this.precoUnitario = precoUnitario;
+    this.quantidade = quantidade;
+    this.descricao = descricao;
+    this.nomeMarca = nomeMarca;
+  }
+
+
 
   public long getId() {
     return id;
@@ -55,6 +70,16 @@ public class Produto {
 
   public void setId(long id) {
     this.id = id;
+  }
+
+
+  public Empresa getEmpresa() {
+    return empresa;
+  }
+
+
+  public void setEmpresa(Empresa empresa) {
+    this.empresa = empresa;
   }
 
 
@@ -117,16 +142,5 @@ public class Produto {
     this.nomeMarca = nomeMarca;
   }
 
-
-  public Empresa getEmpresa() {
-    return empresa;
-  }
-
-
-  public void setEmpresa(Empresa empresa) {
-    this.empresa = empresa;
-  }
-
-  
 
 }

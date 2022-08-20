@@ -5,7 +5,6 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -13,9 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name="T_CALI_PEDIDO_VENDA")
@@ -42,8 +43,10 @@ public class PedidoVenda {
   @Column(name = "vl_total_pedido_venda")
   private BigDecimal valorTotalPedidoVenda;
 
-  @OneToMany(mappedBy = "pedidoVenda", cascade=CascadeType.ALL)
-  private List<ItemPedidoVenda> listaItemProdutoVenda = new ArrayList<ItemPedidoVenda>();
+  
+  @ManyToMany
+  @JoinColumns({@JoinColumn(name= "id_pedido_venda"),@JoinColumn(name="id_produto")})
+  private List<ItemPedidoVenda> itemPedidoVendas = new ArrayList<ItemPedidoVenda>();
 
   public PedidoVenda(){
 
@@ -56,17 +59,6 @@ public class PedidoVenda {
     this.dataPedidoVenda = dataPedidoVenda;
   }
 
-
-  public PedidoVenda(Empresa empresa, Usuario usuario, Instant dataPedidoVenda, BigDecimal valorTotalPedidoVenda,
-      List<ItemPedidoVenda> listaItemProdutoVenda) {
-    this.empresa = empresa;
-    this.usuario = usuario;
-    this.dataPedidoVenda = dataPedidoVenda;
-    this.valorTotalPedidoVenda = valorTotalPedidoVenda;
-    this.listaItemProdutoVenda = listaItemProdutoVenda;
-  }
-
-  
 
   public PedidoVenda(Empresa empresa, Usuario usuario, Instant dataPedidoVenda, BigDecimal valorTotalPedidoVenda) {
     this.empresa = empresa;
@@ -122,28 +114,24 @@ public BigDecimal getValorTotalPedidoVenda() {
     this.usuario = usuario;
   }
 
-
-  public List<ItemPedidoVenda> getListaItemProdutoVenda() {
-    return listaItemProdutoVenda;
+  public List<ItemPedidoVenda> getItemPedidoVendas() {
+    return itemPedidoVendas;
   }
 
-  public void adicionarItemNoCarrinho(ItemPedidoVenda itemPedidoVenda){
-    this.listaItemProdutoVenda.add(itemPedidoVenda);
-    System.out.println("ADICIONADO NA LISTA  "+ this.listaItemProdutoVenda);
+  public void setItemPedidoVendas(List<ItemPedidoVenda> itemPedidoVendas) {
+    this.itemPedidoVendas = itemPedidoVendas;
   }
 
+  public void adicionar(ItemPedidoVenda itemPedidoVenda){
+    this.itemPedidoVendas.add(itemPedidoVenda);
+  }
 
   @Override
   public String toString() {
     return "PedidoVenda [dataPedidoVenda=" + dataPedidoVenda + ", empresa=" + empresa + ", id=" + id
-        + ", listaItemProdutoVenda=" + listaItemProdutoVenda + ", usuario=" + usuario + ", valorTotalPedidoVenda="
+        + ", itemPedidoVendas=" + itemPedidoVendas + ", usuario=" + usuario + ", valorTotalPedidoVenda="
         + valorTotalPedidoVenda + "]";
-  }
-
-  public void setListaItemProdutoVenda(List<ItemPedidoVenda> listaItemProdutoVenda) {
-    this.listaItemProdutoVenda = listaItemProdutoVenda;
-  }
-
+  } 
   
   
 }

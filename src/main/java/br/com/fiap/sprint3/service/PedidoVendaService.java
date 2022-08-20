@@ -1,21 +1,17 @@
 package br.com.fiap.sprint3.service;
 
-
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.ArrayList;
+
 import java.util.List;
-
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
-import br.com.fiap.sprint3.model.Empresa;
 import br.com.fiap.sprint3.model.ItemPedidoVenda;
 import br.com.fiap.sprint3.model.PedidoVenda;
-import br.com.fiap.sprint3.model.Produto;
+
 import br.com.fiap.sprint3.model.Usuario;
 import br.com.fiap.sprint3.repository.ItemPedidoVendaRepository;
 import br.com.fiap.sprint3.repository.PedidoVendaRepository;
@@ -34,29 +30,22 @@ public class PedidoVendaService {
     return repo.findAll();
   }
 
-  public PedidoVenda compra(Usuario usuario, Empresa empresa, Produto produto, int quantidade) {
-		
-		PedidoVenda pedidoVenda = new PedidoVenda(empresa, usuario, Instant.now(), produto.getPrecoUnitario());
-
-     repo.save(pedidoVenda);
+  public PedidoVenda compra(Usuario usuario, List<ItemPedidoVenda> itemPedidoVenda) {
+    BigDecimal valorTotalItem = new BigDecimal(0);
+    PedidoVenda pedidoVenda = new PedidoVenda();
+    for (ItemPedidoVenda item : itemPedidoVenda) {
+      valorTotalItem = valorTotalItem.add(valorTotal(item.getQuantidadePedida(), item.getProduto().getPrecoUnitario()));
+      pedidoVenda = new PedidoVenda(item.getProduto().getEmpresa(), usuario, Instant.now(), 
+      valorTotalItem);
      
-    ItemPedidoVenda itemPedidoVenda = new ItemPedidoVenda(pedidoVenda, produto, quantidade, 
-    produto.getPrecoUnitario(), valorTotal(quantidade, produto.getPrecoUnitario()));
-
-    repositoryItem.save(itemPedidoVenda);
-
-    List<ItemPedidoVenda> listaItemPedidoVenda = new ArrayList<ItemPedidoVenda>();
-    listaItemPedidoVenda.add(itemPedidoVenda);
-
+      repo.save(pedidoVenda);
+      item.setPedidoVenda(pedidoVenda);
+      repositoryItem.save(item);
+    }
     
-    // pedidoVenda.setListaItemProdutoVenda(listaItemPedidoVenda);
-    // System.out.println(listaItemPedidoVenda.toString());
-    pedidoVenda.adicionarItemNoCarrinho(itemPedidoVenda);
-    repo.save(pedidoVenda);
-   
-    System.out.println(pedidoVenda.getId() + "AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"); 
+    pedidoVenda.setItemPedidoVendas(itemPedidoVenda);
+    return pedidoVenda;
 
-		return pedidoVenda;
 	}
 
 	public BigDecimal valorTotal(int quantidade, BigDecimal valorUnitario) {

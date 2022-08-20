@@ -1,38 +1,34 @@
 package br.com.fiap.sprint3.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
-
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
-@IdClass(ItemPedidoVendaPk.class)
 @Table(name= "T_CALI_ITEM_PEDIDO_VENDA")
-public class ItemPedidoVenda {
+public class ItemPedidoVenda implements Serializable{
   
-  
-  @Id 
+  @EmbeddedId
   @Column(name="id_item")
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
-  private long id;
-
-  @Id
+  private ItemPedidoVendaPk id = new ItemPedidoVendaPk();
+ 
   @ManyToOne
-  @JoinColumn(name="id_pedido_venda")
+  @JsonIgnore
+  @MapsId("idPedidoVenda")
   private PedidoVenda pedidoVenda;
 
+ 
   @ManyToOne
-  @JoinColumn(name="id_produto")
+  @MapsId("idProduto")
   private Produto produto;
 
   @Column(name="qt_pedida")
@@ -59,13 +55,26 @@ public class ItemPedidoVenda {
     this.valorTotalItemVenda = valorTotalItemVenda;
   }
 
+  
 
+  public ItemPedidoVenda(Produto produto, int quantidadePedida) {
+    this.produto = produto;
+    this.quantidadePedida = quantidadePedida;
+  }
 
-  public long getId() {
+  public ItemPedidoVenda(Produto produto, int quantidadePedida, 
+      BigDecimal valorUnitarioVenda) {
+    this.produto = produto;
+    this.quantidadePedida = quantidadePedida;
+    this.valorUnitarioVenda = valorUnitarioVenda;
+    
+  }
+
+  public ItemPedidoVendaPk getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(ItemPedidoVendaPk id) {
     this.id = id;
   }
 
@@ -117,12 +126,14 @@ public class ItemPedidoVenda {
     this.valorTotalItemVenda = valorTotalItemVenda;
   }
 
-  @Override
-  public String toString() {
-    return "ItemPedidoVenda [id=" + id + ", pedidoVenda=" + pedidoVenda + ", produto=" + produto + ", quantidadePedida="
-        + quantidadePedida + ", valorDescontoItemVenda=" + valorDescontoItemVenda + ", valorTotalItemVenda="
-        + valorTotalItemVenda + ", valorUnitarioVenda=" + valorUnitarioVenda + "]";
-  }
+@Override
+public String toString() {
+	return "ItemPedidoVenda [id=" + id + ", pedidoVenda=" + pedidoVenda + ", produto=" + produto + ", quantidadePedida="
+			+ quantidadePedida + ", valorDescontoItemVenda=" + valorDescontoItemVenda + ", valorUnitarioVenda="
+			+ valorUnitarioVenda + ", valorTotalItemVenda=" + valorTotalItemVenda + "]";
+}
+  
+  
 
 
 
