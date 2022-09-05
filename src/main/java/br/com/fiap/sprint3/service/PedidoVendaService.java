@@ -50,8 +50,8 @@ public class PedidoVendaService {
 			listaitemPedidoVenda.add(newItemPedidoVenda);
 		}
 		pedidoVenda.setValorTotalPedidoVenda(valorTotalItem);
-		repo.save(pedidoVenda);
 		pedidoVenda.setItemPedidoVendas(listaitemPedidoVenda);
+		repo.save(pedidoVenda);
 		return pedidoVenda;
 
 	}
@@ -60,5 +60,4 @@ public class PedidoVendaService {
 		BigDecimal quantidadeBigDecimal = new BigDecimal(quantidade);
 		return valorUnitario.multiply(quantidadeBigDecimal);
 	}
-
 }
